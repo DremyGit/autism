@@ -16,7 +16,6 @@ const Container = styled.div`
   padding-top: 36px;
   justify-content: space-around;
 `
-
 const Title = styled.div`
   font-size: 20px;
   color: #000;

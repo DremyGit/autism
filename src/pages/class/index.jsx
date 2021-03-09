@@ -9,7 +9,6 @@ import dark from '../../themes/dark';
 import { formatDate } from '../../utils/date';
 
 const TaskGroupList = styled.div`
-  padding-left: 32px;
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
@@ -53,6 +52,8 @@ const reducer = (state, { type, payload = {} }) => {
           present: state.feature[0],
           feature: state.feature.slice(1)
         }
+      case 'reset':
+        return initRecordState()
 
     default:
       return state;
@@ -120,17 +121,6 @@ function Class({ taskModel }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const groupListRef = useRef(null);
-  useEffect(() => {
-    function handleClick(e) {
-      console.log(e);
-    }
-    const groupList = groupListRef.current;
-    groupList.addEventListener('click', handleClick, true);
-    return () => {
-      groupList.removeEventListener('click', handleClick, true);
-    }
-  }, [])
 
   function handleActive(id) {
     if (!activeIdRef.current) {
@@ -140,14 +130,14 @@ function Class({ taskModel }) {
     activeIdRef.current = id;
     setActiveId(id)
   }
-  // function handleInactive() {
-  //   if (activeIdRef.current) {
-  //     callNative('turnOff')
-  //       .catch(() => {});
-  //   }
-  //   activeIdRef.current = null;
-  //   setActiveId(null)
-  // }
+  function handleInactive() {
+    if (activeIdRef.current) {
+      callNative('turnOff')
+        .catch(() => {});
+    }
+    activeIdRef.current = null;
+    setActiveId(null)
+  }
 
   function handleCorrect(id, isExternal) {
     if (isExternal) {
@@ -167,6 +157,10 @@ function Class({ taskModel }) {
   function handleRedo(id) {
     dispatch({ type: 'redo' })
   }
+  function handleReset() {
+    dispatch({ type: 'reset' })
+    setActiveId(null)
+  }
   return (
     <ThemeProvider theme={dark}>
       <Page>
@@ -174,7 +168,7 @@ function Class({ taskModel }) {
           onUndo={handleUndo} canUndo={records.past.length > 0}
           onRedo={handleRedo} canRedo={records.feature.length > 0}
         />
-        <TaskGroupList ref={groupListRef}>
+        <TaskGroupList onClick={handleInactive}>
           {taskModel.map(({ groupName, taskList }, index) => (
             <TaskGroup
               groupName={groupName}
@@ -188,7 +182,7 @@ function Class({ taskModel }) {
             />
           ))}
         </TaskGroupList>
-        <Tabbar />
+        <Tabbar onRecordReset={handleReset} />
       </Page>
     </ThemeProvider>
   );

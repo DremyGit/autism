@@ -22,7 +22,6 @@ const Placeholder = styled.div`
   height: 30px;
 `
 
-
 const Toolbar = ({ onUndo, canUndo, onRedo, canRedo }) => (
   <>
     <Placeholder />

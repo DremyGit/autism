@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import Counter from './counter';
 
 const Container = styled.div`
-  /* width: ${({ active }) => active ? '274px' : '193px'}; */
   width: 193px;
   height: 176px;
   border-radius: 27px;
-  /* background-color: ${({ active }) => active ? '#fff' : 'rgba(255, 255, 255, 0.07)'}; */
   background-color: rgba(255, 255, 255, 0.07);
   margin-right: 17px;
   flex-shrink: 0;

@@ -12,15 +12,33 @@ const GroupTitle = styled.h2`
   color: #fff;
   margin-top: 20px;
   margin-bottom: 12px;
+  padding-left: 32px;
+  @media (max-width: 549px) {
+    padding-left: 16px;
+  }
+  @media (min-width: 872px) {
+    ${Container}:nth-child(2) & {
+      padding-left: 0;
+    }
+  }
 `
 const TaskList = styled.div`
   display: flex;
   max-width: 100%;
   overflow-x: scroll;
 `
-
 const TaskListContainer = styled.div`
   display: flex;
+  padding-left: 32px;
+  @media (max-width: 549px) {
+    padding-left: 16px;
+  }
+
+  @media (min-width: 872px) {
+    ${Container}:nth-child(2) & {
+      padding-left: 0;
+    }
+  }
 `
 
 const TaskGroup = ({ groupName, taskList = [], records, onCorrect, onMistake, onActive, activeId }) => {

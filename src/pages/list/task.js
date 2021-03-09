@@ -10,7 +10,6 @@ const Container = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
-
   @media(max-width: 799px) {
     align-items: flex-start;
     flex-direction: column;

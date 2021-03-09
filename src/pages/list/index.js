@@ -7,6 +7,7 @@ import { formatDate } from '../../utils/date';
 import Header from './header';
 import Group from './group';
 import Task from './task';
+import Active from './active';
 
 function getRecords(date) {
   try {
@@ -25,9 +26,11 @@ const List = ({ taskModel }) => {
 
   const pageRef = useRef(null);
   useEffect(() => {
-    console.log(pageRef.current);
+    if (pageRef.current) {
+      pageRef.current.scrollTop = 0
+    }
   }, [activeDate])
-  console.log({ records })
+
   return (
     <ThemeProvider theme={light}>
       <Page ref={pageRef}>
@@ -47,8 +50,9 @@ const List = ({ taskModel }) => {
             ))}
           </Group>
         ))}
-        <Group title="沟通能力">
-          
+        <Group title="活动教学" hoz>
+          <Active target="请求帮忙/拒绝" activity="1. 时钟拼接" record={records ? '记录：反应较慢，无法独立完成' : ''} />
+          <Active target="呼名反应" activity="1. 他人姓名" record={records ? '记录：对熟悉的人有反应' : ''} />
         </Group>
         <Tabbar />
       </Page>

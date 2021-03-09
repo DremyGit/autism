@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { useLongPress } from 'use-long-press';
+import { resetRecord } from '../utils/record';
 
 export const TabbarContext = React.createContext([2, () => {}]);
 
@@ -21,17 +23,19 @@ const Container = styled.div`
   background: ${({ theme }) => theme.tabbar.background};
   justify-content: space-around;
   display: flex;
-  padding-top: 8px;
+  padding-top: 16px;
   box-sizing: border-box;
 `
-
 const Placeholder = styled.div`
   height: 84px;
 `
 
-
-const Tabbar = () => {
+const Tabbar = ({ onRecordReset }) => {
   const [activeIndex, setActiveIndex] = useContext(TabbarContext)
+  function handleResetRecord() {
+    resetRecord();
+    onRecordReset?.();
+  }
   return (
     <>
       <Placeholder />
@@ -43,6 +47,7 @@ const Tabbar = () => {
             index={index}
             active={activeIndex === index}
             onClick={() => index === 1 || index === 2 ? setActiveIndex(index) : {}}
+            onLongPress={() => index === 2 ? handleResetRecord() : undefined}
           />
         ))}
       </Container>
@@ -81,13 +86,18 @@ const Name = styled.div`
   }
 `
 
-const TabItem = ({ name, active, index, onClick }) => (
-  <Item active={active} className={active ? 'active' : ''} onClick={onClick}>
-    <IconContainer>
-      <Icon active={active} index={index} />
-    </IconContainer>
-    <Name>{name}</Name>
-  </Item>
-)
+const TabItem = ({ name, active, index, onClick, onLongPress }) => {
+  const bind = useLongPress(() => {
+    onLongPress();
+  })
+  return (
+    <Item active={active} className={active ? 'active' : ''} onClick={onClick} {...bind} onContextMenu={(e) => e.preventDefault()}>
+      <IconContainer>
+        <Icon active={active} index={index} />
+      </IconContainer>
+      <Name>{name}</Name>
+    </Item>
+  )
+}
 
 export default Tabbar;
