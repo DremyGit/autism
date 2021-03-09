@@ -140,14 +140,14 @@ function Class({ taskModel }) {
     activeIdRef.current = id;
     setActiveId(id)
   }
-  function handleInactive() {
-    if (activeIdRef.current) {
-      callNative('turnOff')
-        .catch(() => {});
-    }
-    activeIdRef.current = null;
-    setActiveId(null)
-  }
+  // function handleInactive() {
+  //   if (activeIdRef.current) {
+  //     callNative('turnOff')
+  //       .catch(() => {});
+  //   }
+  //   activeIdRef.current = null;
+  //   setActiveId(null)
+  // }
 
   function handleCorrect(id, isExternal) {
     if (isExternal) {
