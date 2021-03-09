@@ -1,0 +1,112 @@
+[
+  {
+    "groupName": "先备能力",
+    "taskList": [
+      {
+        "id": 1,
+        "taskName": "两步指令",
+        "taskMode": "串联faded",
+        "taskDesc": "阶段一（3选2）"
+      },
+      {
+        "id": 2,
+        "taskName": "听觉记忆",
+        "taskMode": "串联faded",
+        "taskDesc": "阶段一（3选2）"
+      }
+    ]
+  },
+  {
+    "groupName": "沟通能力",
+    "taskList": [
+      {
+        "id": 3,
+        "taskName": "图片沟通",
+        "taskMode": "2D",
+        "taskDesc": "第一阶段"
+      },
+      {
+        "id": 4,
+        "taskName": "要求注意力",
+        "taskMode": "2D",
+        "taskDesc": "第一阶段"
+      }
+    ]
+  },
+  {
+    "groupName": "认知能力",
+    "taskList": [
+      {
+        "id": 5,
+        "taskName": "辨认职业功能",
+        "taskMode": null,
+        "taskDesc": "医生、老师"
+      },
+      {
+        "id": 6,
+        "taskName": "相对概念",
+        "taskMode": "2GP3I",
+        "taskDesc": "大、小"
+      },
+      {
+        "id": 7,
+        "taskName": "排序",
+        "taskMode": "3GP2I",
+        "taskDesc": "生病、洗手"
+      },
+      {
+        "id": 8,
+        "taskName": "点数",
+        "taskMode": "GPfaded",
+        "taskDesc": "阶段一（1-5）"
+      },
+      {
+        "id": 9,
+        "taskName": "场所配对",
+        "taskMode": null,
+        "taskDesc": "教室、公交站"
+      },
+      {
+        "id": 10,
+        "taskName": "所属关系",
+        "taskMode": "GPfaded",
+        "taskDesc": "阶段一（1-5）"
+      }
+    ]
+  },
+  {
+    "groupName": "社交能力",
+    "taskList": [
+      {
+        "id": 11,
+        "taskName": "主动打招呼",
+        "taskMode": null,
+        "taskDesc": null
+      },
+      {
+        "id": 12,
+        "taskName": "假想游戏",
+        "taskMode": null,
+        "taskDesc": null
+      },
+      {
+        "id": 13,
+        "taskName": "轮流",
+        "taskMode": null,
+        "taskDesc": "钓鱼、到自己、等待"
+      },
+      {
+        "id": 14,
+        "taskName": "理解游戏规则",
+        "taskMode": null,
+        "taskDesc": "水果蹲、自己蹲、指"
+      },
+      {
+        "id": 15,
+        "taskName": "大小",
+        "taskMode": null,
+        "taskDesc": "教室、公交站"
+      }
+    ]
+  }
+]

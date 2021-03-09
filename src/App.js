@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Class from './pages/class'
+import List from './pages/list'
+import { TabbarContext } from './components/tabbar';
+import { useState } from 'react';
+import taskModel from './data.json';
+
+
+const pages = {
+  1: <List taskModel={taskModel} />,
+  2: <Class taskModel={taskModel} />
+}
+
 
 function App() {
+  const tabState = useState(2);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TabbarContext.Provider value={tabState}>
+      {pages[tabState[0]]}
+    </TabbarContext.Provider>
   );
 }
 

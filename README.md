@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Autism
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Web App that provides treatment for children with autism
+
+![https://raw.githubusercontent.com/DremyGit/autism/master/image.png]()
+
+## Available Scripts In the project directory, you can run: 
 
 ## Available Scripts
 
