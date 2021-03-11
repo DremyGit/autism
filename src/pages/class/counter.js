@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTransition, animated } from 'react-spring';
 
 const BarContainer = styled.div`
   margin-top: 12px;
@@ -41,6 +42,22 @@ const MistakeBar = styled.div`
   border-radius: ${({ finished }) => finished ? ' 0 4.5px 4.5px 0' : '4.5px'};
   width: ${({ mistake = 0 }) => mistake * 10 + '%'};
 `
+const BarCounter = ({ active, correct, mistake, onCorrect, onMistake }) => {
+  const finished = correct + mistake >= 10 && correct && mistake;
+  return (
+    <BarContainer>
+      <NumberLine>
+        <CorrectNumber>{correct || null}</CorrectNumber>
+        <MistakeNumber>{mistake || null}</MistakeNumber>
+      </NumberLine>
+      <CounterBar>
+        <CorrectBar correct={correct} finished={finished} />
+        <MistakeBar mistake={mistake} finished={finished} />
+      </CounterBar>
+    </BarContainer>
+  )
+}
+
 const ButtonContainer = styled.div`
   margin-top: 12px;
   display: flex;
@@ -68,39 +85,60 @@ const ButtonTitle = styled.div`
   margin-bottom: 4px;
   font-size: 16px;
 `
-const ButtonValue = styled.div`
-  font-size: 20px;
-  font-weight: 600;
-`
 
-const Counter = ({ active, correct, mistake, onCorrect, onMistake }) => {
-  const finished = correct + mistake >= 10 && correct && mistake;
-  if (!active) {
-    return (
-      <BarContainer>
-        <NumberLine>
-          <CorrectNumber>{correct || null}</CorrectNumber>
-          <MistakeNumber>{mistake || null}</MistakeNumber>
-        </NumberLine>
-        <CounterBar>
-          <CorrectBar correct={correct} finished={finished} />
-          <MistakeBar mistake={mistake} finished={finished} />
-        </CounterBar>
-      </BarContainer>
-    )
-  }
+const ButtonCounter = ({ correct, mistake, onCorrect, onMistake }) => {
   return (
     <ButtonContainer>
       <CorrectButton onClick={onCorrect}>
         <ButtonTitle>正确</ButtonTitle>
-        <ButtonValue>{correct}</ButtonValue>
+        <ScrollerCount value={correct} />
       </CorrectButton>
       <MistakeButton onClick={onMistake}>
         <ButtonTitle>错误</ButtonTitle>
-        <ButtonValue>{mistake}</ButtonValue>
+        <ScrollerCount value={mistake} />
       </MistakeButton>
     </ButtonContainer>
   )
+}
+
+const CountContainer = styled.div`
+  position: relative;
+  height: 20px;
+  width: 40px;
+`
+
+const CountValue = styled(animated.div)`
+  position: absolute;
+  font-size: 20px;
+  font-weight: 600;
+  width: 40px;
+  text-align: center;
+`
+
+const ScrollerCount = ({ value }) => {
+  const items =
+    value % 3 === 0
+      ? [value, value + 1, value - 1]
+      : value % 3 === 1
+        ? [value - 1, value, value + 1]
+        : [value + 1, value - 1, value];
+  const transitions = useTransition(value % 3, index => items[index], {
+    from: { opacity: 0, transform: 'translate3d(0,30px,0)' },
+    enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
+    leave: { opacity: 0, transform: 'translate3d(0,-14px,0)' },
+  })
+  console.log(transitions)
+  return (
+    <CountContainer>
+      {transitions.map(({ item: index, props, key }) => (
+        <CountValue key={key} style={props}>{items[index]}</CountValue>
+      ))}
+    </CountContainer>
+  )
+}
+
+const Counter = ({ active, ...props }) => {
+  return active ? <ButtonCounter {...props} /> : <BarCounter {...props} />
 }
 
 export default Counter;

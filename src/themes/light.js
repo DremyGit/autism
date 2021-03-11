@@ -23,7 +23,7 @@ const light = {
       color: '#000'
     },
     iconNameActive: {
-      color: '#A7E744'
+      color: '#000'
     },
     icons: [
       { default: icon1, active: icon1A },

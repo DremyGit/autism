@@ -1,12 +1,11 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
 import Counter from './counter';
 
-const Container = styled.div`
-  width: 193px;
+const Container = styled(animated.div)`
   height: 176px;
   border-radius: 27px;
-  background-color: rgba(255, 255, 255, 0.07);
   margin-right: 17px;
   flex-shrink: 0;
   display: flex;
@@ -14,11 +13,6 @@ const Container = styled.div`
   padding: 24px;
   box-sizing: border-box;
   user-select: none;
-
-  &.active {
-    width: 274px;
-    background-color: #fff;
-  }
 `
 const Header = styled.div`
   display: flex;
@@ -60,8 +54,13 @@ const Desc = styled.div`
 `
 
 const TaskItem = ({ id, active, taskName, taskMode, taskDesc, correct, mistake, onActive, onCorrect, onMistake }) => {
+  const props = useSpring({
+    width: active ? 274 : 193,
+    backgroundColor: active ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.07)'
+  })
+
   return (
-    <Container className={active ? 'active' : undefined} onClick={(e) => { e.stopPropagation(); onActive(id) }}>
+    <Container className={active ? 'active' : undefined} onClick={(e) => { e.stopPropagation(); onActive(id) }} style={props}>
       <Header>
         <Title>{taskName}</Title>
         <Desc>{taskMode || '-'}</Desc>
