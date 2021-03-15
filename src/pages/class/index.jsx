@@ -119,7 +119,7 @@ function Class({ taskModel }) {
       window.WebViewJavascriptBridge.registerHandler('press', handlePress);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [activeId])
 
 
   function handleActive(id) {
