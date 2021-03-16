@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { useLongPress } from 'use-long-press';
 import { resetRecord } from '../utils/record';
 
@@ -80,22 +80,20 @@ const Icon = styled.div`
 `
 const Name = styled.div`
   font-size: 14px;
-  color: ${({ theme }) => theme.tabbar.iconName.color};
-  ${Item}.active & {
-    color: ${({ theme }) => theme.tabbar.iconNameActive.color};
-  }
+  color: ${({ color }) => color};
 `
 
 const TabItem = ({ name, active, index, onClick, onLongPress }) => {
   const bind = useLongPress(() => {
     onLongPress();
   })
+  const theme = useTheme()
   return (
     <Item active={active} className={active ? 'active' : ''} onClick={onClick} {...bind} onContextMenu={(e) => e.preventDefault()}>
       <IconContainer>
         <Icon active={active} index={index} />
       </IconContainer>
-      <Name>{name}</Name>
+      <Name color={theme.tabbar[active ? 'iconNameActive' : 'iconName'].color}>{name}</Name>
     </Item>
   )
 }

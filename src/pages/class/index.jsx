@@ -140,9 +140,9 @@ function Class({ taskModel }) {
   }
 
   function handleCorrect(id, isExternal) {
-    if (isExternal) {
+    // if (isExternal) {
       showResult(true)
-    }
+    // }
     dispatch({ type: 'correct', payload: { id } })
   }
   function handleMistake(id, isExternal) {

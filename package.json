@@ -12,7 +12,10 @@
     "react-spring": "^8.0.27",
     "styled-components": "^5.2.1",
     "use-long-press": "^1.0.5",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "workbox-precaching": "^6.1.1",
+    "workbox-routing": "^6.1.1",
+    "workbox-strategies": "^6.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

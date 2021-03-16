@@ -22,7 +22,8 @@ const Apng = styled.img`
   max-width: 100%;
 `
 
-const Result = ({ isCorrect, onEnded }) => {
+
+const Result = ({ isCorrect, onEnded, count }) => {
   const audioRef = useRef(null);
   useEffect(() => {
     audioRef.current.play();
@@ -32,10 +33,12 @@ const Result = ({ isCorrect, onEnded }) => {
   return (
     <Mask>
       <audio src={sound} ref={audioRef} onEnded={onEnded} />
-      <Apng src={png} />
+      <Apng src={`${png}?count=${count}`} />
     </Mask>
   )
 }
+
+let count = 0;
 
 export function showResult(isCorrect) {
   const node = document.createElement('div');
@@ -43,5 +46,5 @@ export function showResult(isCorrect) {
   function remove() {
     document.body.removeChild(node)
   }
-  ReactDOM.render(<Result isCorrect={isCorrect} onEnded={remove} />, node)
+  ReactDOM.render(<Result isCorrect={isCorrect} onEnded={remove} count={count++} />, node)
 }

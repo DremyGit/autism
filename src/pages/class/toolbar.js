@@ -12,8 +12,9 @@ const Container = styled.div`
   justify-content: space-between;
 `
 const Icon = styled.img`
-  width: 32px;
-  height: 32px;
+  width: 31px;
+  height: 24px;
+  padding: 8px 4px;
   opacity: ${({ disabled }) => disabled ? 0.15 : 0.6};
 `
 const Placeholder = styled.div`

@@ -127,7 +127,6 @@ const ScrollerCount = ({ value }) => {
     enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
     leave: { opacity: 0, transform: 'translate3d(0,-14px,0)' },
   })
-  console.log(transitions)
   return (
     <CountContainer>
       {transitions.map(({ item: index, props, key }) => (
